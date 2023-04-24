@@ -26,4 +26,13 @@ class Post extends Model implements HasMedia
             ->fit(Manipulations::FIT_FILL, 200, 200)
             ->nonQueued();
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('default')
+            ->useFallbackUrl(asset('fallback/fallbackPostImage.png'))
+            ->useFallbackUrl(asset('fallback/fallbackPostImage.png'), 'thumbnail')
+            ->useFallbackPath(public_path('fallback/fallbackPostImage.png'))
+            ->useFallbackPath(public_path('fallback/fallbackPostImage.png'), 'thumbnail');
+    }
 }

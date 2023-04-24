@@ -23,8 +23,13 @@ class PostController extends Controller
     {
         $post = Post::create($request->validated());
 
-        foreach ($request->file('images', []) as $image) {
-            $post->addMedia($image)->toMediaCollection();
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images', []) as $image) {
+                $post->addMedia($image)->toMediaCollection();
+            }
+        } else {
+            // Adding default image
+            $post->addMedia(storage_path('defaults/defaultPostImage.png'))->preservingOriginal()->toMediaCollection();
         }
 
         return redirect()->route('posts.index');
