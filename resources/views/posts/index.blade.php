@@ -27,6 +27,9 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Content</span>
                                 </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left">
+                                    <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</span>
+                                </th>
                             </tr>
                             </thead>
 
@@ -34,15 +37,21 @@
                             @foreach($posts as $post)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        <img src="{{ $post->getFirstMedia()?->getUrl('thumbnail') }}"
-                                             class="object-contain"
-                                             alt="{{ $post->title }}"/>
+                                        @foreach($post->getMedia() as $media)
+                                            <img src="{{ $media->getUrl('thumbnail') }}"
+                                                 class="object-contain"
+                                                 alt="{{ $post->title }}"/>
+                                        @endforeach
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $post->title }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $post->post_text }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                        <a href="{{ route('posts.show', $post->id) }}"
+                                           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</a>
                                     </td>
                                 </tr>
                             @endforeach

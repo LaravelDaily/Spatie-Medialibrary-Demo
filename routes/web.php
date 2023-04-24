@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('users', [UserController::class, 'index'])->name('users.index');
 Route::resource('posts', PostController::class);
+Route::get('posts/{post}/move/{media}/{direction}', [PostController::class, 'moveMedia'])->name('posts.moveMedia');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
