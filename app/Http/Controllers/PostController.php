@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['media'])->paginate(10);
+        $posts = Post::with(['media.media'])->paginate(10);
 
         return view('posts.index', compact('posts'));
     }
@@ -21,11 +21,7 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $post = Post::create($request->validated());
-
-        foreach ($request->file('images', []) as $image) {
-            $post->addMedia($image)->toMediaCollection();
-        }
+        Post::create($request->validated());
 
         return redirect()->route('posts.index');
     }

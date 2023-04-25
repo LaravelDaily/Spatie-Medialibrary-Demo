@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostMediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::get('/', function () {
 
 Route::get('users', [UserController::class, 'index'])->name('users.index');
 Route::resource('posts', PostController::class);
+Route::resource('media', PostMediaController::class)->only(['create', 'store']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

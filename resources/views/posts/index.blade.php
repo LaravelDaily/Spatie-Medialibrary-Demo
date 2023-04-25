@@ -12,6 +12,9 @@
                     <a href="{{ route('posts.create') }}"
                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create
                         Post</a>
+                    <a href="{{ route('media.create') }}"
+                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Post Media
+                    </a>
                 </div>
                 <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                     <div class="min-w-full align-middle">
@@ -34,9 +37,11 @@
                             @foreach($posts as $post)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        <img src="{{ $post->getFirstMedia()?->getUrl('thumbnail') }}"
-                                             class="object-contain"
-                                             alt="{{ $post->title }}"/>
+                                        @foreach($post->media as $media)
+                                            <img src="{{ $media->getFirstMedia()?->getUrl('thumbnail') }}"
+                                                 class="object-contain"
+                                                 alt="{{ $post->title }}"/>
+                                        @endforeach
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $post->title }}
