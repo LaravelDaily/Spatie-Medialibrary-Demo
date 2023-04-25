@@ -40,7 +40,8 @@
                                         @foreach($post->getMedia() as $media)
                                             <img src="{{ $media->getUrl('thumbnail') }}"
                                                  class="object-contain"
-                                                 alt="{{ $post->title }}"/>
+                                                 alt="{{ $media->getCustomProperty('alt_text', $post->title) }}"/>
+                                            <span class="text-center w-full block">{{ $media->caption }}</span>
                                         @endforeach
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">

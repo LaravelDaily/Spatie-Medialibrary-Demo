@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostMediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::get('/', function () {
 Route::get('users', [UserController::class, 'index'])->name('users.index');
 Route::resource('posts', PostController::class);
 Route::get('posts/{post}/move/{media}/{direction}', [PostController::class, 'moveMedia'])->name('posts.moveMedia');
+Route::resource('posts.media', PostMediaController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
