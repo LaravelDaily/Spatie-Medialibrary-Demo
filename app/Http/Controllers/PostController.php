@@ -24,7 +24,9 @@ class PostController extends Controller
         $post = Post::create($request->validated());
 
         foreach ($request->file('images', []) as $image) {
-            $post->addMedia($image)->toMediaCollection();
+            $post->addMedia($image)
+                ->withResponsiveImages()
+                ->toMediaCollection();
         }
 
         return redirect()->route('posts.index');

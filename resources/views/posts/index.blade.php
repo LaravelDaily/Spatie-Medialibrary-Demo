@@ -35,6 +35,7 @@
                                 <tr class="bg-white">
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         <img src="{{ $post->getFirstMedia()?->getUrl('thumbnail') }}"
+                                             srcset="{{ implode(', ', $post->getFirstMedia()?->getResponsiveImageUrls()) }}"
                                              class="object-contain"
                                              alt="{{ $post->title }}"/>
                                     </td>
